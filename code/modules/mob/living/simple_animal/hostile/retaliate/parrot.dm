@@ -173,8 +173,8 @@
 						ears.dropInto(loc)
 						ears = null
 						for(var/possible_phrase in speak)
-							if(copytext_char(possible_phrase,1,3) in department_radio_keys)
-								possible_phrase = copytext_char(possible_phrase,3,length(possible_phrase))
+							if(copytext(possible_phrase,1,3) in department_radio_keys)
+								possible_phrase = copytext(possible_phrase,3,length(possible_phrase))
 					else
 						to_chat(user, "<span class='warning'>There is nothing to remove from its [remove_from].</span>")
 			return TOPIC_HANDLED
@@ -355,8 +355,8 @@
 						if(prob(50))
 							useradio = 1
 
-						if(copytext_char(possible_phrase,1,3) in department_radio_keys)
-							possible_phrase = "[useradio?pick(available_channels):""] [copytext_char(possible_phrase,3,length(possible_phrase)+1)]" //crop out the channel prefix
+						if(copytext(possible_phrase,1,3) in department_radio_keys)
+							possible_phrase = "[useradio?pick(available_channels):""] [copytext(possible_phrase,3,length(possible_phrase)+1)]" //crop out the channel prefix
 						else
 							possible_phrase = "[useradio?pick(available_channels):""] [possible_phrase]"
 
@@ -364,8 +364,8 @@
 
 				else //If we have no headset or channels to use, don't try to use any!
 					for(var/possible_phrase in speak)
-						if(copytext_char(possible_phrase,1,3) in department_radio_keys)
-							possible_phrase = "[copytext_char(possible_phrase,3,length(possible_phrase)+1)]" //crop out the channel prefix
+						if(copytext(possible_phrase,1,3) in department_radio_keys)
+							possible_phrase = "[copytext(possible_phrase,3,length(possible_phrase)+1)]" //crop out the channel prefix
 						newspeak.Add(possible_phrase)
 				speak = newspeak
 
@@ -717,17 +717,17 @@
 
 
 	var/message_mode=""
-	if(copytext_char(message,1,2) == get_prefix_key(/decl/prefix/radio_main_channel))
+	if(copytext(message,1,2) == get_prefix_key(/decl/prefix/radio_main_channel))
 		message_mode = "headset"
-		message = copytext_char(message,2)
+		message = copytext(message,2)
 
 	if(length(message) >= 2)
-		var/channel_prefix = copytext_char(message, 1 ,3)
+		var/channel_prefix = copytext(message, 1 ,3)
 		message_mode = department_radio_keys[channel_prefix]
 
-	if(copytext_char(message,1,2) == get_prefix_key(/decl/prefix/radio_channel_selection))
+	if(copytext(message,1,2) == get_prefix_key(/decl/prefix/radio_channel_selection))
 		var/positioncut = 3
-		message = trim(copytext_char(message,positioncut))
+		message = trim(copytext(message,positioncut))
 
 	message = capitalize(trim_left(message))
 
