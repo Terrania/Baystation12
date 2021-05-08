@@ -46,7 +46,7 @@ Right Click       - List/Create Area
 			color = distinct_colors[len]
 			distinct_colors.Cut(len)
 		else
-			color = "#" + copytext(md5("\ref[T.loc]"), 1, 7)
+			color = "#" + copytext_char(md5("\ref[T.loc]"), 1, 7)
 		area_colors[T.loc] = color
 	M.color = color
 

@@ -248,7 +248,7 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 				color = distinct_colors[len]
 				distinct_colors.Cut(len)
 			else
-				color = "#" + copytext(md5("\ref[T]"), 1, 7)
+				color = "#" + copytext_char(md5("\ref[T]"), 1, 7)
 			vision_images[T] = color
 		M.color = color
 		M.alpha = 255

@@ -75,7 +75,7 @@ proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_spee
 	if(input_size < 20) // Short messages get distorted too. Bit hacksy.
 		distortion += (20-input_size)/2
 	while(lentext <= input_size)
-		var/newletter=copytext(message, lentext, lentext+1)
+		var/newletter=copytext_char(message, lentext, lentext+1)
 		if(!prob(distortion_chance))
 			new_message += newletter
 			lentext += 1

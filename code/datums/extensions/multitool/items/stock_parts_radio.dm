@@ -142,7 +142,7 @@
 	if(href_list["add"])
 		if(!LAZYLEN(valid_events))
 			return MT_REFRESH
-		LAZYSET(selected_events, copytext(md5(num2text(rand(0, 1))), 1, 11), valid_events[pick(valid_events)]) // random key
+		LAZYSET(selected_events, copytext_char(md5(num2text(rand(0, 1))), 1, 11), valid_events[pick(valid_events)]) // random key
 		return MT_REFRESH
 	if(href_list["desc"])
 		var/decl/public_access/variable = locate(href_list["desc"])
