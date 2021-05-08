@@ -11,6 +11,11 @@
 	// Are we placing or stripping?
 	var/stripping = FALSE
 	var/obj/item/held = user.get_active_hand()
+
+	if (istype(held, /obj/item/grab))
+		to_chat(user, SPAN_WARNING("You cannot do this with the hand that has an active grab!"))
+		return
+
 	if(!istype(held) || is_robot_module(held))
 		stripping = TRUE
 
@@ -209,11 +214,11 @@
 				return
 
 		// Find an internal source.
-		if(istype(back, /obj/item/weapon/tank))
+		if(istype(back, /obj/item/tank))
 			set_internals(back)
-		else if(istype(s_store, /obj/item/weapon/tank))
+		else if(istype(s_store, /obj/item/tank))
 			set_internals(s_store)
-		else if(istype(belt, /obj/item/weapon/tank))
+		else if(istype(belt, /obj/item/tank))
 			set_internals(belt)
 		else
 			to_chat(user, "<span class='warning'>You could not find a suitable tank!</span>")
