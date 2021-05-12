@@ -127,12 +127,19 @@ var/world_topic_spam_protect_time = world.timeofday
 			input["message"] += ascii2text(text2num(pos))
 	var/key_valid = config.comms_password && input["key"] == config.comms_password
 
-
 	if (T == "ping")
 		var/x = 1
 		for (var/client/C)
 			x++
 		return x
+	
+	if(input["type"] == "who")
+		var/n = ""
+		for(var/mob/M in GLOB.player_list)
+			if(M.client)
+				n+=M.key
+				n+=" "
+		return n
 
 	if(input["type"] == "who")
 		var/n = ""
@@ -257,6 +264,30 @@ var/world_topic_spam_protect_time = world.timeofday
 		ban_unban_log_save("[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.")
 		notes_add(target,"[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.",input["id"])
 		qdel(C)
+	
+	else if(input["type"]=="ooc")
+		if(!key_valid)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+				spawn(50)
+				world_topic_spam_protect_time = world.time
+				return "Bad Key (Throttled)"
+			world_topic_spam_protect_time = world.time
+			return "Bad Key"
+		var/ckey = input["user"] 
+		var/message = input["message"]
+		if(!ckey||!message)
+			return
+		if(!config.vars["ooc_allowed"]&&!input["isadmin"])
+			return "globally muted"
+		var/sent_message = "[create_text_tag("DISCORD OOC:")] <EM>[ckey]:</EM> <span class='message linkify'>[message]</span>"
+		SSwebhooks.send(WEBHOOK_OOC, list("key" = ckey, "message" = message, type="DOOC"))
+		for(var/client/target in GLOB.clients)
+			if(!target)
+				continue //sanity
+			if(target.is_key_ignored(ckey) || target.get_preference_value(/datum/client_preference/show_ooc) == GLOB.PREF_HIDE || target.get_preference_value(/datum/client_preference/show_discord_ooc) == GLOB.PREF_HIDE  && !input["isadmin"]) // If we're ignored by this person, then do nothing.
+				continue //if it shouldn't see then it doesn't
+			to_chat(target, "<span class='ooc'><span class='everyone'>[sent_message]</span></span>")
+		
 
 	else if(input["type"]=="ooc")
 		if(!key_valid)

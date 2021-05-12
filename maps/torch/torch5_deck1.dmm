@@ -25547,7 +25547,6 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/item/device/radio/beacon,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/misc_lab)
 "pEr" = (
@@ -27724,7 +27723,8 @@
 	internal_pressure_bound_default = 4000;
 	pressure_checks = 2;
 	pressure_checks_default = 2;
-	pump_direction = 0
+	pump_direction = 0;
+	use_power = 1
 	},
 /turf/simulated/floor/reinforced,
 /area/rnd/misc_lab)
@@ -28127,6 +28127,7 @@
 /obj/effect/landmark{
 	name = "bluespacerift"
 	},
+/obj/item/device/radio/beacon,
 /turf/simulated/floor/reinforced,
 /area/rnd/misc_lab)
 "srb" = (

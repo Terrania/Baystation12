@@ -411,9 +411,10 @@
 	},
 /obj/machinery/power/apc{
 	dir = 4;
+	icon_state = "apc0";
 	name = "east bump";
 	pixel_x = 24;
-	req_access = newlist()
+	pixel_y = 0
 	},
 /obj/structure/cable{
 	d2 = 8;

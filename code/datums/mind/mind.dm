@@ -67,7 +67,6 @@
 
 /datum/mind/Destroy()
 	QDEL_NULL_LIST(memories)
-	QDEL_NULL_LIST(goals)
 	SSticker.minds -= src
 	. = ..()
 

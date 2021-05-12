@@ -98,11 +98,11 @@
 	// Basic intro text.
 	to_chat(player.current, "<span class='danger'><font size=3>You are a [role_text]!</font></span>")
 	if(leader_welcome_text && player == leader)
-		to_chat(player.current, "<span class='antagdesc'>[get_leader_welcome_text(player.current)]</span>")
+		to_chat(player.current, "<span class='antagdesc'>[leader_welcome_text]</span>")
 	else
-		to_chat(player.current, "<span class='antagdesc'>[get_welcome_text(player.current)]</span>")
+		to_chat(player.current, "<span class='antagdesc'>[welcome_text]</span>")
 	if (config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !player.objectives.len)
-		to_chat(player.current, get_antag_text(player.current))
+		to_chat(player.current, "[antag_text]")
 
 	if((flags & ANTAG_HAS_NUKE) && !spawned_nuke)
 		create_nuke()

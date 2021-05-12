@@ -1,5 +1,5 @@
 /datum/buildmode_overlay
-	var/list/display_atoms = list()
+	var/list/images = list()
 	var/mob/user
 	var/datum/build_mode/buildmode
 	var/shown
@@ -13,18 +13,17 @@
 		icon_state = ""
 	for (var/x = -size to size step 1)
 		for (var/y = -size to size step 1)
-			var/atom/movable/M = new
-			M.mouse_opacity = 0
-			M.icon = 'icons/turf/overlays.dmi'
-			M.icon_state = icon_state
-			M.screen_loc = "CENTER[x < 0 ? "-" : "+"][abs(x)],CENTER[y < 0 ? "-" : "+"][abs(y)]"
-			M.appearance_flags = KEEP_APART|RESET_COLOR|RESET_ALPHA|RESET_TRANSFORM|NO_CLIENT_COLOR|TILE_BOUND
-			display_atoms += M
+			var/image/I = new('icons/turf/overlays.dmi', user, icon_state)
+			I.appearance_flags = KEEP_APART|RESET_COLOR|RESET_ALPHA|RESET_TRANSFORM|NO_CLIENT_COLOR|KEEP_APART
+			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+			I.pixel_x = x * 32
+			I.pixel_y = y * 32
+			images += I
 	. = ..()
 
 /datum/buildmode_overlay/Destroy()
 	Hide()
-	display_atoms = null
+	images = null
 	buildmode = null
 	user = null
 	. = ..()
@@ -32,13 +31,13 @@
 /datum/buildmode_overlay/proc/Show()
 	if (shown || QDELETED(user?.client))
 		return
-	user.client.screen += display_atoms
+	user.client.images += images
 	shown = TRUE
 
 /datum/buildmode_overlay/proc/Hide()
 	if (!shown || QDELETED(user?.client))
 		return
-	user.client.screen -= display_atoms
+	user.client.images -= images
 	shown = FALSE
 
 /datum/buildmode_overlay/proc/TimerEvent()
@@ -47,10 +46,10 @@
 	var/i = 1
 	for (var/x = -size to size step 1)
 		for (var/y = -size to size step 1)
-			var/atom/movable/M = display_atoms[i++]
+			var/image/I = images[i++]
 			var/turf/T = locate(user.x + x, user.y + y, user.z)
 			if (T)
-				M.alpha = 255
-				ImmediateInvokeAsync(buildmode, /datum/build_mode/.proc/UpdateOverlay, M, T)
+				I.alpha = 255
+				ImmediateInvokeAsync(buildmode, /datum/build_mode/.proc/UpdateOverlay, I, T)
 			else
-				M.alpha = 0
+				I.alpha = 0

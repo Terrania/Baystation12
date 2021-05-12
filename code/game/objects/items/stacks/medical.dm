@@ -159,7 +159,7 @@
 /obj/item/stack/medical/advanced/bruise_pack
 	name = "advanced trauma kit"
 	singular_name = "advanced trauma kit"
-	desc = "A packet filled antibacterial bio-adhesive, used to quickly seal and disinfect cuts, bruises, and other physical trauma. Can be used to treat both limbs and internal organs."
+	desc = "An advanced trauma kit for severe injuries."
 	icon_state = "traumakit"
 	heal_brute = 0
 	origin_tech = list(TECH_BIO = 1)
@@ -215,7 +215,7 @@
 /obj/item/stack/medical/advanced/ointment
 	name = "advanced burn kit"
 	singular_name = "advanced burn kit"
-	desc = "A packet containing a delicate membrane used to salve and disinfect burn wounds. Can be used to treat both limbs and internal organs."
+	desc = "An advanced treatment kit for severe burns."
 	icon_state = "burnkit"
 	heal_burn = 5
 	origin_tech = list(TECH_BIO = 1)

@@ -191,7 +191,6 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.5
-	removable = FALSE
 
 /obj/item/clothing/accessory/armguards/ballistic
 	name = "ballistic arm guards"
@@ -205,7 +204,6 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.7
-	removable = FALSE
 
 /obj/item/clothing/accessory/armguards/ablative
 	name = "ablative arm guards"
@@ -219,7 +217,6 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0
-	removable = FALSE
 
 //Leg guards
 /obj/item/clothing/accessory/legguards
@@ -283,7 +280,6 @@
 		)
 	siemens_coefficient = 0.5
 	slowdown = 1
-	removable = FALSE
 
 /obj/item/clothing/accessory/legguards/ballistic
 	name = "ballistic leg guards"
@@ -298,7 +294,6 @@
 		)
 	siemens_coefficient = 0.7
 	slowdown = 1
-	removable = FALSE
 
 /obj/item/clothing/accessory/legguards/ablative
 	name = "ablative leg guards"
@@ -313,7 +308,6 @@
 		)
 	siemens_coefficient = 0
 	slowdown = 1
-	removable = FALSE
 
 
 //Decorative attachments
