@@ -8,7 +8,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	icon_state = "ghost"
 	appearance_flags = KEEP_TOGETHER
 	blinded = 0
-	anchored = 1	//  don't get pushed around
+	anchored = TRUE	//  don't get pushed around
 	universal_speak = TRUE
 
 	mob_flags = MOB_FLAG_HOLY_BAD
@@ -337,7 +337,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/turf/t = get_turf(src)
 	if(t)
 		var/rads = SSradiation.get_rads_at_turf(t)
-		to_chat(src, "<span class='notice'>Radiation level: [rads ? rads : "0"] Roentgen.</span>")
+		to_chat(src, "<span class='notice'>Radiation level: [rads ? rads : "0"] IU/s.</span>")
 
 /mob/observer/ghost/verb/scan_target()
 	set name = "Scan Target"

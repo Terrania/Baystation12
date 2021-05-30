@@ -12,7 +12,7 @@
 	nanomodule_path = /datum/nano_module/program/comm
 	extended_desc = "Used to command and control. Can relay long-range communications. This program can not be run on tablet computers."
 	required_access = access_bridge
-	requires_ntnet = 1
+	requires_ntnet = TRUE
 	size = 12
 	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
 	network_destination = "long-range communication array"
@@ -133,7 +133,7 @@
 			. = TRUE
 			if(is_autenthicated(user) && !issilicon(usr) && ntn_comm)
 				if(user)
-					var/obj/item/weapon/card/id/id_card = user.GetIdCard()
+					var/obj/item/card/id/id_card = user.GetIdCard()
 					crew_announcement.announcer = GetNameAndAssignmentFromId(id_card)
 				else
 					crew_announcement.announcer = "Unknown"
